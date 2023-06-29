@@ -1,0 +1,10 @@
+---
+- name: Install GIT
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Ensure GIT Installed at Latest
+    ansible.builtin.yum:
+      name: git
+      state: latest

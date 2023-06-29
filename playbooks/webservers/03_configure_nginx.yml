@@ -1,0 +1,14 @@
+---
+- name: Configure Nginx 
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Copy Over the New NGINX Config
+    ansible.builtin.copy:
+      src: ~/ansible/files/nginx/nginx.conf
+      dest: /etc/nginx
+  - name: Reload Nginx
+    ansible.builtin.service:
+      name: nginx
+      state: reloaded

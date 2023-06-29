@@ -1,0 +1,21 @@
+---
+- name: Update web servers
+  hosts: webservers
+  become: true
+
+  tasks:
+  - name: Ensure EPEL is Enabled for Amazon Linux 2
+    ansible.builtin.command:
+      cmd: amazon-linux-extras enable epel
+  - name: Ensure EPEL is Installed
+    ansible.builtin.yum:
+      name: epel-release
+      state: latest
+  - name: Ensure nginx is at the latest version
+    ansible.builtin.yum:
+      name: nginx
+      state: latest
+  - name: Ensure nginx is running
+    ansible.builtin.service:
+      name: nginx
+      state: started

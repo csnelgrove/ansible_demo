@@ -1,0 +1,17 @@
+---
+- name: Checkout Chases Resume App Codebase
+  hosts: webservers
+
+  tasks:
+  - name: Clone GIT Branch with Source Code
+    ansible.builtin.git:
+      repo: https://github.com/csnelgrove/resume.git
+      dest: /home/ec2-user/www/
+      version: master
+      force: yes
+  - name: Fix Permissions for Home Folder
+    ansible.builtin.command:
+      cmd: /usr/bin/chmod 755 /home/ec2-user/ 
+  - name: Fix Permissions for WWW Folder
+    ansible.builtin.command:
+      cmd: /usr/bin/chmod -R 755 /home/ec2-user/www/
